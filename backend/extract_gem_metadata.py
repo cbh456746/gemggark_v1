@@ -97,12 +97,21 @@ def extract_metadata(api_key: str) -> None:
     
     print("Successfully saved metadata to gem_metadata.json")
 
-if __name__ == "__main__":
-    api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyIsImtpZCI6IktYMk40TkRDSTJ5NTA5NWpjTWk5TllqY2lyZyJ9.eyJpc3MiOiJodHRwczovL2x1ZHkuZ2FtZS5vbnN0b3ZlLmNvbSIsImF1ZCI6Imh0dHBzOi8vbHVkeS5nYW1lLm9uc3RvdmUuY29tL3Jlc291cmNlcyIsImNsaWVudF9pZCI6IjEwMDAwMDAwMDA0MjIxNDAifQ.cFbYLDgW2ZxFXBhY71_v2eEkKwgf0I1-2NDZhzdgBiEl9hyTgLjRMCQaSFkZdNnKFK0xe4rGaQe_-nVzbmxyXEHJTVijwEuADOaD-jv5wgSylpZNYqrjH11vmUtPLSWmU7Rel2tXOv9LCs_nd6fCrkDQsyV7ekiM_SyG0gCcB98v-BGfcbPo2Ds-xD5C-_i0BLg7DYHbRw5n1s1Z5lAgv2mP6o0rpd6bSacJUyhwB7UJhbVL4qNcborgKBSJROLOJl9nKsEUTosvARxT0H3boojuZBoqPXy-Uohog2jWfYYXP8uPpwdHgM9ZnBkw-EeKZW3pkm6YHe5dcqRJnnHg6A"
+import os
+from dotenv import load_dotenv
 
-    if "여기에_당신의_API_키를_붙여넣으세요" in api_key:
+if __name__ == "__main__":
+    # .env 파일 불러오기
+    load_dotenv()
+
+    # 환경변수에서 API_KEY 가져오기
+    api_key = os.getenv("LOSTARK_API_KEY")
+
+    if not api_key:
+        print("!!! 오류: .env 파일에 LOSTARK_API_KEY가 설정되어 있지 않습니다. !!!")
+    elif "여기에_당신의_API_키를_붙여넣으세요" in api_key:
         print("!!! 오류: 스크립트의 api_key 변수에 실제 API 키를 입력해야 합니다. !!!")
     else:
-
         extract_metadata(api_key=api_key)
+
 
